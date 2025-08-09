@@ -1,0 +1,40 @@
+/* File: styles/globals.css */
+
+:root {
+  --background-color: #1a1a1a;
+  --text-color: #e0e0e0;
+  --surface-color: #2a2a2a;
+  --primary-color: #007bff;
+  --accent-color: #333333;
+  --border-color: #444444;
+  --user-message-bg: #0056b3;
+  --ai-message-bg: #444444;
+  --button-hover: #0069d9;
+  --delete-color: #dc3545;
+  --delete-hover: #c82333;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+}
+
+/* Scrollbar styling untuk tema gelap */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

@@ -1,0 +1,304 @@
+/* File: styles/Home.module.css */
+
+.container {
+  display: flex;
+  max-width: 1200px;
+  min-height: 100vh;
+  margin: auto;
+  padding: 20px;
+  font-family: sans-serif;
+  gap: 20px;
+}
+
+.title {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+  width: 250px;
+  background-color: var(--surface-color);
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebarHeader {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.newChatButton {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  transition: background-color 0.2s;
+}
+.newChatButton:hover {
+  background-color: var(--button-hover);
+}
+
+.historyList {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.historyItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 12px;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.historyItem:hover {
+  background-color: var(--accent-color);
+}
+
+.activeHistoryItem {
+  background-color: var(--accent-color);
+  font-weight: bold;
+}
+
+.historyItemText {
+  flex-grow: 1;
+  text-align: left;
+  border: none;
+  background: none;
+  color: var(--text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.deleteHistoryButton {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 1rem;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.deleteHistoryButton:hover {
+  opacity: 1;
+  color: var(--delete-color);
+}
+
+.clearAllButton {
+  width: 100%;
+  background-color: var(--delete-color);
+  color: white;
+  border: none;
+  padding: 10px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 10px;
+  transition: background-color 0.2s;
+}
+.clearAllButton:hover {
+  background-color: var(--delete-hover);
+}
+
+/* --- Konten Utama --- */
+.mainContent {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.chatWindow {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 15px;
+  height: 100%;
+  overflow-y: auto;
+  background-color: var(--surface-color);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.message {
+  padding: 10px 15px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.userMessage {
+  background: var(--user-message-bg);
+  color: white;
+  align-self: flex-end;
+}
+
+.aiMessage {
+  background: var(--ai-message-bg);
+  color: var(--text-color);
+  align-self: flex-start;
+}
+
+.inputContainer {
+  display: flex;
+  margin-top: 20px;
+  gap: 10px;
+  align-items: center;
+}
+
+.input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  background-color: var(--surface-color);
+  color: var(--text-color);
+}
+
+.fileInput {
+  display: none; /* Sembunyikan input file asli */
+}
+
+.fileInputLabel {
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  padding: 10px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.fileInputLabel:hover {
+  background-color: var(--border-color);
+}
+
+.button {
+  padding: 12px 20px;
+  border-radius: 20px;
+  border: none;
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.button:hover:not(:disabled) {
+  background-color: var(--button-hover);
+}
+.button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.emptyMessage {
+  color: #888;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.chatImage {
+  max-width: 200px;
+  border-radius: 10px;
+  margin-top: 5px;
+}
+
+.imagePreview {
+  position: relative;
+  display: inline-block;
+  margin: 10px 0;
+  max-width: 200px;
+}
+.imagePreview .chatImage {
+  width: 100%;
+}
+.deleteImageButton {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.menuButton {
+  display: none; /* Sembunyikan di desktop */
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  font-size: 1.5rem;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+/* 📱 Mobile dan iPad responsive */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .menuButton {
+    display: block; /* Tampilkan di mobile */
+  }
+
+  .sidebar {
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 999;
+    transform: translateX(-100%);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+  }
+  
+  .sidebarOpen {
+    transform: translateX(0);
+  }
+
+  .historyList {
+    max-height: 200px;
+  }
+
+  .chatWindow {
+    height: 300px;
+  }
+
+  .message {
+    max-width: 90%;
+  }
+
+  .chatImage {
+    max-width: 100%;
+  }
+
+  .inputContainer {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .button, .newChatButton, .clearAllButton {
+    width: 100%;
+  }
+}
