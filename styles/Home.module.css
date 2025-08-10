@@ -8,6 +8,23 @@
   padding: 20px;
   font-family: sans-serif;
   gap: 20px;
+  position: relative;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  display: none;
+}
+@media (max-width: 768px) {
+  .overlay {
+    display: block;
+  }
 }
 
 .title {
@@ -137,6 +154,7 @@
   margin-bottom: 10px;
   max-width: 80%;
   word-wrap: break-word;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .userMessage {
@@ -158,6 +176,12 @@
   align-items: center;
 }
 
+.inputGroup {
+  display: flex;
+  flex-grow: 1;
+  gap: 10px;
+}
+
 .input {
   flex: 1;
   padding: 12px;
@@ -168,7 +192,7 @@
 }
 
 .fileInput {
-  display: none; /* Sembunyikan input file asli */
+  display: none;
 }
 
 .fileInputLabel {
@@ -178,9 +202,16 @@
   border-radius: 20px;
   cursor: pointer;
   transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .fileInputLabel:hover {
   background-color: var(--border-color);
+}
+
+.fileInputIcon {
+  display: none;
 }
 
 .button {
@@ -217,6 +248,7 @@
   display: inline-block;
   margin: 10px 0;
   max-width: 200px;
+  align-self: flex-end;
 }
 .imagePreview .chatImage {
   width: 100%;
@@ -234,10 +266,13 @@
   height: 25px;
   font-size: 14px;
   line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .menuButton {
-  display: none; /* Sembunyikan di desktop */
+  display: none;
   position: fixed;
   top: 15px;
   left: 15px;
@@ -251,7 +286,7 @@
   cursor: pointer;
 }
 
-/* 📱 Mobile dan iPad responsive */
+/* --- Mobile dan iPad responsive --- */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
@@ -259,7 +294,7 @@
   }
 
   .menuButton {
-    display: block; /* Tampilkan di mobile */
+    display: block;
   }
 
   .sidebar {
@@ -276,13 +311,13 @@
   .sidebarOpen {
     transform: translateX(0);
   }
-
+  
   .historyList {
-    max-height: 200px;
+    max-height: 50vh;
   }
 
   .chatWindow {
-    height: 300px;
+    height: calc(100vh - 180px);
   }
 
   .message {
@@ -293,12 +328,53 @@
     max-width: 100%;
   }
 
+  .imagePreview {
+    max-width: 150px;
+  }
+
   .inputContainer {
     flex-direction: column;
     gap: 10px;
   }
 
-  .button, .newChatButton, .clearAllButton {
+  .inputGroup {
     width: 100%;
+  }
+
+  .input {
+    flex: 1;
+  }
+
+  .button {
+    width: auto;
+  }
+  
+  .fileInputLabel {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .fileInputLabelText {
+    display: none;
+  }
+
+  .fileInputIcon {
+    display: block;
+    font-size: 1.2rem;
+  }
+}
+
+/* Untuk perangkat yang lebih lebar dari mobile (misalnya, iPad) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    padding: 15px;
+  }
+
+  .sidebar {
+    width: 200px;
+  }
+
+  .inputContainer {
+    flex-direction: row;
   }
 }
