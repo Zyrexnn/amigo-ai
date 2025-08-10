@@ -20,6 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
   
   const ai = new GoogleGenerativeAI(apiKey);
+  // Mengembalikan model ke versi yang stabil dan berfungsi
   const model = ai.getGenerativeModel({ model: 'gemini-1.5-flash-latest' });
 
   try {
