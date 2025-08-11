@@ -3,9 +3,38 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+// Cooldown per-perintah
+let lastRequestTime = 0;
+const COOLDOWN_PERIOD = 5000; // 5 detik
+
+// Cooldown tambahan
+let commandCount = 0;
+let lastExtendedCooldownTime = 0;
+const EXTENDED_COOLDOWN_PERIOD = 10000; // 10 detik
+const COMMAND_LIMIT = 7;
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method Not Allowed' });
+  }
+
+  // Cek extended cooldown terlebih dahulu
+  if (Date.now() - lastExtendedCooldownTime < EXTENDED_COOLDOWN_PERIOD) {
+      return res.status(429).json({ message: 'Too Many Requests. Please wait 10 seconds.' });
+  }
+
+  // Cek cooldown per-perintah
+  const now = Date.now();
+  if (now - lastRequestTime < COOLDOWN_PERIOD) {
+    return res.status(429).json({ message: 'Too Many Requests. Please wait 5 seconds.' });
+  }
+  lastRequestTime = now;
+  commandCount++;
+
+  // Jika commandCount mencapai batas, terapkan extended cooldown
+  if (commandCount >= COMMAND_LIMIT) {
+    lastExtendedCooldownTime = now;
+    commandCount = 0; // Reset counter
   }
 
   const { message, image } = req.body;
@@ -20,8 +49,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
   
   const ai = new GoogleGenerativeAI(apiKey);
-  // Mengembalikan model ke versi yang stabil dan berfungsi
-  const model = ai.getGenerativeModel({ model: 'gemini-1.5-flash-latest' });
+ 
+  const model = ai.getGenerativeModel({ model: 'gemini-2.5-flash-lite' });
 
   try {
     const chat = model.startChat({

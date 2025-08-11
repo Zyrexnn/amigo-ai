@@ -1,40 +1,39 @@
 /* File: styles/globals.css */
 
 :root {
-  --background-color: #1a1a1a;
-  --text-color: #e0e0e0;
-  --surface-color: #2a2a2a;
-  --primary-color: #007bff;
-  --accent-color: #333333;
-  --border-color: #444444;
-  --user-message-bg: #0056b3;
-  --ai-message-bg: #444444;
-  --button-hover: #0069d9;
-  --delete-color: #dc3545;
-  --delete-hover: #c82333;
+  --background-color: #0f0f10;
+  --text-color: #e4e6eb;
+  --surface-color: rgba(30, 30, 32, 0.8);
+  --primary-color: #4e9eff;
+  --accent-color: rgba(255,255,255,0.06);
+  --border-color: rgba(255,255,255,0.12);
+  --user-message-bg: linear-gradient(135deg, #4e9eff, #0063d8);
+  --ai-message-bg: rgba(255,255,255,0.04);
+  --button-hover: #2d8cff;
+  --delete-color: #e74c3c;
+  --delete-hover: #c0392b;
+}
+
+html, body, #__next {
+  height: 100%;
 }
 
 body {
-  background-color: var(--background-color);
+  background: linear-gradient(160deg, #0d0d0e 0%, #121214 100%);
   color: var(--text-color);
   margin: 0;
   padding: 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Scrollbar styling untuk tema gelap */
-::-webkit-scrollbar {
-  width: 8px;
-}
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.06); border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.12); }
 
-::-webkit-scrollbar-track {
-  background: var(--surface-color);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--border-color);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
+/* Small utility */
+button { font-family: inherit; }
+input, textarea { font-family: inherit; color: inherit; }

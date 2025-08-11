@@ -1,380 +1,452 @@
 /* File: styles/Home.module.css */
 
+/* Container */
 .container {
   display: flex;
-  max-width: 1200px;
+  max-width: 1400px;
   min-height: 100vh;
   margin: auto;
-  padding: 20px;
-  font-family: sans-serif;
+  padding: 24px;
   gap: 20px;
   position: relative;
+  box-sizing: border-box;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
+/* Overlay (mobile) */
 .overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.45);
   z-index: 998;
+}
+
+/* Menu button (mobile) */
+.menuButton {
   display: none;
-}
-@media (max-width: 768px) {
-  .overlay {
-    display: block;
-  }
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  color: var(--text-color);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 1.1rem;
+  z-index: 1000;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
 }
 
-.title {
-  text-align: center;
-  font-size: 1.5rem;
-}
-
-/* --- Sidebar --- */
+/* Sidebar */
 .sidebar {
-  width: 250px;
-  background-color: var(--surface-color);
-  border-radius: 8px;
-  padding: 15px;
+  width: 280px;
+  background: var(--surface-color);
+  border-radius: 14px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease-in-out;
+  gap: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  transform: translateX(0);
 }
 
+/* Slide in/out helpers */
+.sidebarOpen {
+  animation: slideIn 320ms cubic-bezier(.2,.9,.3,1) both;
+}
+.sidebarClosing {
+  animation: slideOut 280ms cubic-bezier(.2,.9,.3,1) both;
+}
+
+/* Sidebar header */
 .sidebarHeader {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.newChatButton {
-  width: 100%;
-  padding: 12px;
-  background-color: var(--primary-color);
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
-  margin-bottom: 10px;
-  transition: background-color 0.2s;
-}
-.newChatButton:hover {
-  background-color: var(--button-hover);
-}
-
-.historyList {
-  flex-grow: 1;
-  overflow-y: auto;
-  margin-bottom: 10px;
-}
-
-.historyItem {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  padding: 12px;
-  border-bottom: 1px solid var(--border-color);
-  cursor: pointer;
-  transition: background-color 0.2s;
+  flex-direction: column;
+  gap: 10px;
 }
-.historyItem:hover {
-  background-color: var(--accent-color);
-}
-
-.activeHistoryItem {
-  background-color: var(--accent-color);
-  font-weight: bold;
-}
-
-.historyItemText {
-  flex-grow: 1;
-  text-align: left;
-  border: none;
-  background: none;
+.title {
+  margin: 0;
+  font-size: 1.25rem;
   color: var(--text-color);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
-.deleteHistoryButton {
-  background: none;
-  border: none;
-  color: var(--text-color);
-  font-size: 1rem;
-  cursor: pointer;
-  opacity: 0.7;
-  transition: opacity 0.2s;
-}
-.deleteHistoryButton:hover {
-  opacity: 1;
-  color: var(--delete-color);
-}
-
-.clearAllButton {
-  width: 100%;
-  background-color: var(--delete-color);
+/* Buttons in sidebar */
+.newChatButton {
+  background: var(--primary-color);
   color: white;
   border: none;
   padding: 10px 12px;
+  border-radius: 10px;
   cursor: pointer;
-  border-radius: 4px;
-  margin-top: 10px;
-  transition: background-color 0.2s;
+  font-weight: 600;
+  transition: transform .18s ease, background-color .18s ease;
 }
-.clearAllButton:hover {
-  background-color: var(--delete-hover);
+.newChatButton:hover {
+  transform: translateY(-2px);
+  background: var(--button-hover);
 }
 
-/* --- Konten Utama --- */
+/* History list */
+.historyList {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-right: 6px;
+  display: flex;
+  flex-direction: column;
+}
+.emptyHistory {
+  color: #bbb;
+  font-size: 0.9rem;
+  padding: 8px 6px;
+}
+
+/* Each history item */
+.historyItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.02);
+  margin-bottom: 8px;
+  transition: background-color .16s ease, transform .12s ease;
+  cursor: pointer;
+}
+.historyItem:hover {
+  background: rgba(255,255,255,0.04);
+  transform: translateY(-2px);
+}
+.activeHistoryItem {
+  background: linear-gradient(90deg, rgba(78,158,255,0.16), rgba(0,99,216,0.12));
+  color: white;
+  font-weight: 600;
+}
+.historyItemText {
+  flex: 1;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-size: 0.95rem;
+  padding: 0;
+}
+.deleteHistoryButton {
+  background: transparent;
+  border: none;
+  color: inherit;
+  opacity: 0.8;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.deleteHistoryButton:hover {
+  color: var(--delete-color);
+  opacity: 1;
+}
+
+/* Clear all */
+.clearAllButton {
+  background: var(--delete-color);
+  color: white;
+  border: none;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform .12s ease;
+}
+.clearAllButton:hover {
+  transform: translateY(-2px);
+}
+
+/* Main content */
 .mainContent {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  gap: 12px;
 }
 
+/* Chat window */
 .chatWindow {
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 15px;
-  height: 100%;
+  flex-grow: 1;
+  padding: 20px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
   overflow-y: auto;
-  background-color: var(--surface-color);
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.22);
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
 }
 
+/* Message bubble */
 .message {
-  padding: 10px 15px;
-  border-radius: 20px;
-  margin-bottom: 10px;
-  max-width: 80%;
+  padding: 12px 16px;
+  border-radius: 18px;
+  margin-bottom: 12px;
+  max-width: 74%;
   word-wrap: break-word;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  position: relative;
 }
 
+/* User & AI styling */
 .userMessage {
-  background: var(--user-message-bg);
+  background: linear-gradient(135deg, #4e9eff, #0063d8);
   color: white;
   align-self: flex-end;
+  border-bottom-right-radius: 6px;
+  animation: bubbleInUser .28s cubic-bezier(.2,.9,.3,1) both;
 }
-
 .aiMessage {
-  background: var(--ai-message-bg);
+  background: rgba(255,255,255,0.03);
   color: var(--text-color);
   align-self: flex-start;
+  border-bottom-left-radius: 6px;
+  animation: bubbleInAI .28s cubic-bezier(.2,.9,.3,1) both;
 }
 
-.inputContainer {
+/* message text & meta */
+.messageText {
+  margin: 0;
+  white-space: pre-wrap;
+}
+.msgMeta {
+  margin-top: 8px;
   display: flex;
-  margin-top: 20px;
-  gap: 10px;
-  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  font-size: 0.75rem;
+  opacity: 0.6;
 }
+.msgTime {}
 
-.inputGroup {
-  display: flex;
-  flex-grow: 1;
-  gap: 10px;
-}
-
-.input {
-  flex: 1;
-  padding: 12px;
-  border-radius: 20px;
-  border: 1px solid var(--border-color);
-  background-color: var(--surface-color);
-  color: var(--text-color);
-}
-
-.fileInput {
-  display: none;
-}
-
-.fileInputLabel {
-  background-color: var(--accent-color);
-  color: var(--text-color);
-  padding: 10px 15px;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.fileInputLabel:hover {
-  background-color: var(--border-color);
-}
-
-.fileInputIcon {
-  display: none;
-}
-
-.button {
-  padding: 12px 20px;
-  border-radius: 20px;
-  border: none;
-  background-color: var(--primary-color);
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-.button:hover:not(:disabled) {
-  background-color: var(--button-hover);
-}
-.button:disabled {
-  background-color: #6c757d;
-  cursor: not-allowed;
-}
-
-.emptyMessage {
-  color: #888;
-  text-align: center;
-  margin-top: 50px;
-}
-
+/* chat image */
 .chatImage {
-  max-width: 200px;
+  max-width: 240px;
   border-radius: 10px;
-  margin-top: 5px;
+  margin-top: 8px;
+  display: block;
 }
 
+/* image preview before send */
 .imagePreview {
   position: relative;
-  display: inline-block;
-  margin: 10px 0;
-  max-width: 200px;
   align-self: flex-end;
-}
-.imagePreview .chatImage {
-  width: 100%;
+  margin-bottom: 6px;
+  max-width: 220px;
 }
 .deleteImageButton {
   position: absolute;
-  top: 5px;
-  right: 5px;
-  background-color: rgba(0, 0, 0, 0.5);
+  top: 6px;
+  right: 6px;
+  background: rgba(0,0,0,0.5);
   color: white;
   border: none;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   cursor: pointer;
-  width: 25px;
-  height: 25px;
-  font-size: 14px;
-  line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.menuButton {
-  display: none;
-  position: fixed;
-  top: 15px;
-  left: 15px;
-  background-color: var(--primary-color);
-  color: white;
+/* Input area */
+.inputContainer {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.02);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+}
+.inputGroup {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex: 1;
+}
+.input {
+  flex: 1;
+  padding: 12px 14px;
+  border-radius: 10px;
   border: none;
-  border-radius: 4px;
-  padding: 10px 15px;
-  font-size: 1.5rem;
-  z-index: 1000;
+  outline: none;
+  background: rgba(255,255,255,0.03);
+  color: var(--text-color);
+  font-size: 0.95rem;
+  resize: none;
+  min-height: 44px;
+}
+.button {
+  background: var(--primary-color);
+  border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  color: white;
   cursor: pointer;
+  font-weight: 600;
+  transition: transform .12s ease, background-color .12s ease;
+}
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.button:hover:not(:disabled) {
+  transform: translateY(-3px);
+  background: var(--button-hover);
 }
 
-/* --- Mobile dan iPad responsive --- */
+/* file input */
+.fileInput { display: none; }
+.fileInputLabel {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.02);
+  cursor: pointer;
+  transition: transform .12s ease, background-color .12s ease;
+}
+.fileInputLabel:hover { transform: translateY(-2px); }
+.fileInputLabelText { display: inline-block; }
+.fileInputIcon { display: none; }
+
+/* typing dots */
+.typingDots {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  padding: 8px 12px;
+}
+.typingDots span {
+  width: 8px;
+  height: 8px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 50%;
+  opacity: 0.9;
+  transform: translateY(0);
+  animation: typingDot 1s infinite;
+}
+.typingDots span:nth-child(2) { animation-delay: 0.15s; }
+.typingDots span:nth-child(3) { animation-delay: 0.3s; }
+
+/* small empty message */
+.emptyMessage {
+  color: #9aa0a6;
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* Responsive (mobile) */
 @media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-    padding: 10px;
-  }
-
-  .menuButton {
-    display: block;
-  }
-
+  .container { flex-direction: column; padding: 14px; }
+  .menuButton { display: block; }
   .sidebar {
-    width: 250px;
     position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
+    top: 12px;
+    bottom: 12px;
+    left: 12px;
     z-index: 999;
     transform: translateX(-100%);
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    width: calc(100% - 32px);
+    max-width: 360px;
   }
-  
-  .sidebarOpen {
-    transform: translateX(0);
-  }
-  
-  .historyList {
-    max-height: 50vh;
-  }
-
-  .chatWindow {
-    height: calc(100vh - 180px);
-  }
-
-  .message {
-    max-width: 90%;
-  }
-
-  .chatImage {
-    max-width: 100%;
-  }
-
-  .imagePreview {
-    max-width: 150px;
-  }
-
-  .inputContainer {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .inputGroup {
-    width: 100%;
-  }
-
-  .input {
-    flex: 1;
-  }
-
-  .button {
-    width: auto;
-  }
-  
-  .fileInputLabel {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .fileInputLabelText {
-    display: none;
-  }
-
-  .fileInputIcon {
-    display: block;
-    font-size: 1.2rem;
-  }
+  .sidebarOpen { transform: translateX(0); }
+  .chatWindow { height: calc(100vh - 240px); }
+  .fileInputIcon { display: inline-block; }
+  .fileInputLabelText { display: none; }
+  .message { max-width: 92%; }
+  .chatImage { max-width: 86%; }
+  .imagePreview { max-width: 180px; }
 }
 
-/* Untuk perangkat yang lebih lebar dari mobile (misalnya, iPad) */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .container {
-    padding: 15px;
-  }
+/* ---------------- Animations ---------------- */
 
-  .sidebar {
-    width: 200px;
-  }
+@keyframes slideIn {
+  0% { transform: translateX(-18px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+@keyframes slideOut {
+  0% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(-18px); opacity: 0; }
+}
 
-  .inputContainer {
-    flex-direction: row;
-  }
+@keyframes bubbleInUser {
+  0% { opacity: 0; transform: translateY(10px) scale(.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes bubbleInAI {
+  0% { opacity: 0; transform: translateY(8px) scale(.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes typingDot {
+  0% { transform: translateY(0); opacity: 0.25; }
+  25% { transform: translateY(-6px); opacity: 1; }
+  50% { transform: translateY(0); opacity: 0.5; }
+  100% { transform: translateY(0); opacity: 0.25; }
+}
+
+/* File: styles/Home.module.css */
+/* ... (kode CSS lainnya tetap sama) ... */
+
+/* message text & meta */
+.messageText {
+  margin: 0;
+  white-space: pre-wrap;
+}
+.msgMeta {
+  margin-top: 8px;
+  display: flex;
+  justify-content: flex-end; /* Align time to the right for user messages */
+  gap: 8px;
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+.userMessage .msgMeta {
+  justify-content: flex-end; /* Time on the right for user bubble */
+}
+.aiMessage .msgMeta {
+  justify-content: flex-start; /* Time on the left for AI bubble */
+}
+.msgTime {
+  color: #a0a0a0; /* Contoh warna abu-abu agar terlihat */
+  font-size: 0.7rem;
+}
+
+/* ... (kode CSS lainnya tetap sama) ... */
+ 
+
+/* File: styles/Home.module.css */
+
+/* ... (kode CSS lainnya) ... */
+
+.sidebarFooter {
+    margin-top: auto;
+    padding: 1rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+.logoutButton {
+    width: 100%;
+    padding: 10px;
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.logoutButton:hover {
+    background-color: #c9302c;
 }
